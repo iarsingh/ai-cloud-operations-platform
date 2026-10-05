@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-cloud-operations-platform
+  labels:
+    app: ai-cloud-operations-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-cloud-operations-platform
+  template:
+    metadata:
+      labels:
+        app: ai-cloud-operations-platform
+    spec:
+      containers:
+        - name: api
+          image: ai-cloud-operations-platform:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-cloud-operations-platform
+spec:
+  selector:
+    app: ai-cloud-operations-platform
+  ports:
+    - port: 80
+      targetPort: 8080
