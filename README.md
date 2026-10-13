@@ -1,5 +1,12 @@
 # AI Cloud Operations Platform
 
+## Overview
+
+A cloud operations agent that works in two steps: take an inventory, then recommend. Resources posted to `POST /agent/run` carry idle flags, and the agent returns recommendations based on those flags rather than reading a live cloud account. Any request to apply a change is refused. A versioned `/v1` ops API adds workspaces, tenant isolation, job approval and audit records.
+
+- **Built with:** Python, pytest, Docker, GitHub Actions
+- **Scope:** Local laptop lab with tests; no hosted model, no cloud access, and production apply is refused.
+
 <!-- project-guide:start -->
 ## Project guide
 
